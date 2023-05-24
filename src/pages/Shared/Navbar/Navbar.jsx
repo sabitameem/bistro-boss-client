@@ -1,37 +1,20 @@
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const options = (
+    <>
+      <li>
+        <Link to='/'>Home</Link>
+      </li>
+      <li>
+        <Link to='/menu'>Our Menu</Link>
+      </li>
 
-   const options =<>
-     <li>
-                <a>Item 1</a>
-              </li>
-              <li tabIndex={0}>
-                <a className="justify-between">
-                  Parent
-                  <svg
-                    className="fill-current"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-                  </svg>
-                </a>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a>Item 3</a>
-              </li>
-   </>
+      <li>
+        <a>Item 3</a>
+      </li>
+    </>
+  );
 
   return (
     <>
@@ -56,21 +39,22 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-black"
             >
               {options}
             </ul>
           </div>
-         <div className="block py-0 ps-0 lg:ps-3">
-         <Link to='/' className="normal-case text-lg lg:text-xl mb-0">BISTRO BOSS
-          </Link>
-          <p><span className="text-sm lg:text-base mt-0">RESTAURANT</span></p>
-         </div>
+          <div className="block py-0 ps-0 lg:ps-3">
+            <Link to="/" className="normal-case text-lg lg:text-xl mb-0">
+              BISTRO BOSS
+            </Link>
+            <p>
+              <span className="text-sm lg:text-base mt-0">RESTAURANT</span>
+            </p>
+          </div>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-           {options}
-          </ul>
+          <ul className="menu menu-horizontal px-1">{options}</ul>
         </div>
         <div className="navbar-end">
           <a className="btn">Get started</a>
