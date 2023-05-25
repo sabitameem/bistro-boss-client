@@ -21,9 +21,9 @@ import Order from "../pages/order/Oder/Order";
             element:<Menu></Menu>
         },
         {
-            path: 'order',
+            path: 'order/:category',
             element: <Order></Order>
-        },
+        }
       ]
     },
   ]);

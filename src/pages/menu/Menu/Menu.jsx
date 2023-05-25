@@ -8,6 +8,8 @@ import saladImg from '../../../assets/menu/salad-bg.jpg';
 import useMenu from "../../../hooks/UseMenu";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import MenuCategory from "../MenuCategory/MenuCategory";
+import MenuItems from "../../Shared/MenuItems/MenuItems";
+import { Link } from "react-router-dom";
 
 
 const Menu = () => {
@@ -28,7 +30,23 @@ const Menu = () => {
             <Cover img={menuImg} title='Our menu' subtitle={'Would you like to try a dish?'}></Cover>
             <SectionTitle subHeading="Don't miss" heading="today's offer"></SectionTitle>
             {/* offered */}
-            <MenuCategory items={offered}></MenuCategory>
+            <div className="pt-8">
+    
+         <div className="grid md:grid-cols-2 gap-10 my-16 mx-3 lg:mx-0">
+                {offered.map(item=>
+                    <MenuItems
+                    key={item._id}
+                    item={item}
+                    ></MenuItems>
+                    )}
+            </div>
+            <div className="text-center">
+               <Link to='/order/salad'>
+               <button className="btn btn-outline border-0 border-b-4 mt-8 mb-3 ">ORDER YOUR FAVOURITE FOOD</button>
+               </Link>
+            </div>
+       </div>
+       
             {/* dessert */}
             <MenuCategory
             items={desserts}
