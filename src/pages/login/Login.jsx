@@ -3,7 +3,7 @@ import loginPicture from '../../assets/others/authentication1.png';
 import { loadCaptchaEnginge, LoadCanvasTemplate,validateCaptcha } from 'react-simple-captcha';
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 
 
@@ -12,6 +12,10 @@ import Swal from 'sweetalert2'
 const Login = () => {
   const [disabled,setDisabled]=useState(true)
   const {signIn}=useContext(AuthContext)
+  const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || "/";
     
     useEffect(()=>{
         loadCaptchaEnginge(6); 
@@ -39,6 +43,7 @@ const Login = () => {
                   popup: 'animate__animated animate__fadeOutUp'
                 }
               })
+              navigate(from, { replace: true });
         })
     }
 
@@ -51,7 +56,7 @@ const Login = () => {
         }
    
         else {
-            alert('Captcha Does Not Match');
+            
             setDisabled(true);
         }
     }
