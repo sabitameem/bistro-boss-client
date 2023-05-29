@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
+import SocialLogin from "../Shared/SocialLogin";
 
 const SignUp = () => {
     const { register, handleSubmit,reset, formState: { errors } } = useForm();
@@ -19,16 +20,30 @@ const SignUp = () => {
             console.log(loggedUser)
             updateUserProfile(data.name, data.photoURL)
             .then(()=>{
-               console.log('user profile info updated')
-               reset()
-               Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'User Created Successfully',
-                showConfirmButton: false,
-                timer: 1500
+              
+              const saveUser ={name: data.name, email: data.email}
+
+              fetch('http://localhost:5000/users',{
+                'method': 'POST',
+                headers:{'content-type': 'application/json'},
+                body: JSON.stringify(saveUser)
               })
-              navigate('/')
+              .then(res=> res.json())
+              .then(data =>{
+                if(data.insertedId){
+                  reset()
+                  Swal.fire({
+                   position: 'top-end',
+                   icon: 'success',
+                   title: 'User Created Successfully',
+                   showConfirmButton: false,
+                   timer: 1500
+                 })
+                 navigate('/')
+                }
+              })
+
+               
             })
             .catch(error=> {
                 console.log(error)
@@ -107,9 +122,12 @@ const SignUp = () => {
               </div>
             </form>
             <p className="text-custom-color text-center">Already Registered?<Link to='/login'><span className="font-semibold" >Go to Login Page</span></Link></p>
+            <div className="mt-0 flex justify-center items-center"><span className="mt-7 mr-3">Login With </span> <SocialLogin></SocialLogin><span className="mt-7 ">OOGLE</span></div>
           </div>
         </div>
+        
       </div>
+      
     </>
   );
 };
